@@ -1,6 +1,7 @@
 import express from 'express';
 import { registerRoutes } from '../server/routes';
 import session from 'express-session';
+import serverless from 'serverless-http';
 
 const app = express();
 
@@ -30,4 +31,6 @@ app.use((err, _req, res, _next) => {
   res.status(status).json({ message });
 });
 
-export default app;
+// Export a serverless handler for Vercel
+export const handler = serverless(app);
+export default handler;
