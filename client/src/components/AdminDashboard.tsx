@@ -167,6 +167,23 @@ export default function AdminDashboard({
     setTimeout(() => setIsSubmitting(false), 400);
   };
 
+  // Recompute stats and refresh elections
+  const [isRecomputing, setIsRecomputing] = useState(false);
+  const handleRecomputeStats = async () => {
+    setIsRecomputing(true);
+    try {
+      const res = await fetch('/api/admin/elections/recompute-all-stats', { method: 'POST', credentials: 'include' });
+      if (res.ok) {
+        // After recompute, refresh elections
+        const electionsRes = await fetch('/api/elections', { credentials: 'include' });
+        if (electionsRes.ok) setElections(await electionsRes.json());
+      }
+    } catch (err) {
+      console.error('Failed to recompute stats:', err);
+    }
+    setIsRecomputing(false);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -174,7 +191,12 @@ export default function AdminDashboard({
           <h1 className="text-3xl font-semibold">Admin Dashboard</h1>
           <p className="text-muted-foreground">Manage elections and monitor voting activity</p>
         </div>
-        <Button onClick={handleCreateElection} data-testid="button-create-election"><Plus className="mr-2 h-4 w-4" />Create Election</Button>
+        <div className="flex gap-2">
+          <Button onClick={handleCreateElection} data-testid="button-create-election"><Plus className="mr-2 h-4 w-4" />Create Election</Button>
+          <Button onClick={handleRecomputeStats} disabled={isRecomputing} variant="outline" data-testid="button-recompute-stats">
+            {isRecomputing ? 'Recomputing...' : 'Recompute Stats'}
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

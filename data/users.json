@@ -48,5 +48,17 @@
         "pos_representative"
       ]
     }
+  },
+  {
+    "studentId": "22-00370",
+    "name": "Jericho Galace",
+    "email": "jikjok@gmail.com",
+    "role": "student",
+    "passwordHash": "$2b$12$gixYEiOBTodbvn.kSeXVPOP7DPibHtZTC2KS3hS7RHKaa6D2nExii",
+    "votedElections": {
+      "election_engineering2025": [
+        "pos_representative"
+      ]
+    }
   }
 ]

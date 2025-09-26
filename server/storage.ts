@@ -47,9 +47,28 @@ export interface IStorage {
   getElectionResults(electionId: string): Promise<ElectionResults | undefined>;
   saveElectionResults(results: ElectionResults): Promise<void>;
   exportResultsToCSV(results: ElectionResults): Promise<string>; // returns CSV file path
+  // Recompute stats for an election from saved vote files
+  recomputeElectionStats(electionId: string): Promise<{ totalVotes: number }>;
 }
 
 export class FileStorage implements IStorage {
+  // Recompute totalVotes for all elections by counting user votes in users.json
+  async recomputeAllElectionStatsFromUsers(): Promise<{ [electionId: string]: number }> {
+    const users = await this.getAllUsers();
+    const elections = await this.getAllElections();
+    const results: { [electionId: string]: number } = {};
+    for (const election of elections) {
+      let count = 0;
+      for (const user of users) {
+        if (user.votedElections[election.id] && user.votedElections[election.id].length > 0) {
+          count++;
+        }
+      }
+      results[election.id] = count;
+      await this.updateElection(election.id, { totalVotes: count });
+    }
+    return results;
+  }
   private readonly dataDir = path.join(process.cwd(), "data");
   private readonly usersFile = path.join(this.dataDir, "users.json");
   private readonly electionsDir = path.join(this.dataDir, "elections");
@@ -274,6 +293,21 @@ export class FileStorage implements IStorage {
     const filePath = path.join(this.votesDir, fileName);
 
     await fs.writeFile(filePath, encryptedVoteData, "utf-8");
+    // Attempt to increment the cached totalVotes on the election file so
+    // the admin UI can display updated counts without requiring a separate
+    // results export step. This is best-effort: failures here should not
+    // cause the vote save to fail.
+    try {
+      const election = await this.getElection(vote.electionId);
+      if (election) {
+        const current = typeof election.totalVotes === 'number' ? election.totalVotes : 0;
+        // Use updateElection which handles filename variants
+        await this.updateElection(vote.electionId, { totalVotes: current + 1 });
+      }
+    } catch (err) {
+      console.error('Failed to update election totalVotes after saving vote:', err);
+    }
+
     return voteId;
   }
 
@@ -369,6 +403,36 @@ export class FileStorage implements IStorage {
     await fs.writeFile(csvFilePath, csvContent, 'utf-8');
 
     return csvFilePath;
+  }
+
+  // Recompute totals for an election by scanning the votes directory and
+  // counting vote files for the given election. This provides a reliable
+  // way to recover totals in case they drifted from incremental updates.
+  async recomputeElectionStats(electionId: string): Promise<{ totalVotes: number }> {
+    try {
+      const files = await fs.readdir(this.votesDir);
+      // Count vote files named like: vote_<electionId>_<uuid>.enc
+      const matchPrefix = `vote_${electionId}_`;
+      let count = 0;
+      for (const file of files) {
+        if (file.startsWith(matchPrefix) && file.endsWith('.enc')) count++;
+      }
+
+      // Update election file with recomputed total
+      try {
+        const election = await this.getElection(electionId);
+        if (election) {
+          await this.updateElection(electionId, { totalVotes: count });
+        }
+      } catch (err) {
+        console.error('Failed to persist recomputed election stats:', err);
+      }
+
+      return { totalVotes: count };
+    } catch (err) {
+      console.error('Failed to recompute election stats:', err);
+      return { totalVotes: 0 };
+    }
   }
 
   private escapeCSVField(field: string): string {

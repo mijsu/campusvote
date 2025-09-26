@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Calendar, Users, Vote, Target } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 interface Candidate {
   id: string;
@@ -28,6 +29,8 @@ interface Election {
   endDate: string;
   status: 'upcoming' | 'active' | 'closed';
   positions: Position[];
+  hasVoted?: boolean;
+  votedPositions?: string[];
 }
 
 interface ElectionDetailsModalProps {
@@ -188,6 +191,27 @@ export default function ElectionDetailsModal({ isOpen, onClose, election }: Elec
                 </CardContent>
               </Card>
             ))}
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <CheckCircle className="h-4 w-4 text-muted-foreground" />
+              <span>Votes Cast</span>
+            </div>
+            <div className="font-medium">
+              {Array.isArray((election as any).votedPositions) && (election as any).votedPositions.length > 0 ? (
+                <>
+                  <span>{(election as any).votedPositions.length} vote{(election as any).votedPositions.length !== 1 ? 's' : ''}</span>
+                  <div className="text-sm text-muted-foreground mt-1">
+                    {(election as any).votedPositions.map((pid: string) => {
+                      const pos = election.positions.find(p => p.id === pid);
+                      return pos ? <div key={pid}>• {pos.title}</div> : null;
+                    })}
+                  </div>
+                </>
+              ) : (
+                <span className="text-muted-foreground">You have not voted in this election</span>
+              )}
+            </div>
           </div>
         </div>
       </DialogContent>

@@ -103,6 +103,17 @@ const encryptVote = (voteData: Vote): string => {
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Admin endpoint: Recompute totalVotes for all elections from user votes
+  app.post('/api/admin/elections/recompute-all-stats', requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const results = await storage.recomputeAllElectionStatsFromUsers();
+      await logAudit(req, 'RECOMPUTE_ALL_STATS', `Recomputed stats for all elections`);
+      res.json({ message: 'Recomputed all election stats', results });
+    } catch (error) {
+      console.error('Recompute all stats error:', error);
+      res.status(500).json({ error: 'Failed to recompute all stats' });
+    }
+  });
 
   // =============================================================================
   // ANNOUNCEMENT ROUTES
@@ -642,6 +653,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Get results error:', error);
       res.status(500).json({ error: "Failed to fetch results" });
+    }
+  });
+
+  // Recompute election stats from stored vote files (admin only)
+  app.post('/api/admin/elections/:id/recompute-stats', requireAdmin, async (req: Request, res: Response) => {
+    try {
+      const electionId = req.params.id;
+      const result = await storage.recomputeElectionStats(electionId);
+
+      await logAudit(req, 'RECOMPUTE_STATS', `Recomputed stats for election: ${electionId}`);
+
+      res.json({ electionId, totalVotes: result.totalVotes });
+    } catch (error) {
+      console.error('Recompute stats error:', error);
+      res.status(500).json({ error: 'Failed to recompute stats' });
     }
   });
 

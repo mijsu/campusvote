@@ -51,6 +51,9 @@ export const electionSchema = z.object({
   positions: z.array(positionSchema),
   createdBy: z.string(), // admin studentId
   createdAt: z.string(), // ISO string
+  // Optional runtime stats maintained in election JSON files
+  totalVotes: z.number().optional(),
+  eligibleVoters: z.number().optional(),
 });
 
 export const insertElectionSchema = electionSchema.omit({ 
