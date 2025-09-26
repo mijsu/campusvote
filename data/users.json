@@ -1,0 +1,52 @@
+[
+  {
+    "studentId": "admin2025",
+    "name": "New Admin",
+    "email": "admin2025@university.edu",
+    "role": "admin",
+    "passwordHash": "$2b$12$cAx8chySgHbfUh4mL7T93.i5fP9rN9tLuREqMyDAgamUq78sWTPCq",
+    "votedElections": {}
+  },
+  {
+    "studentId": "22-00376",
+    "name": "Mar James Delimios",
+    "email": "jim@gmail.com",
+    "role": "student",
+    "passwordHash": "$2b$12$Q/jP0YpGCKUPEY6ZlQiTWe9KsPSbP/gDcDDu2Tl/zuBBqSs1MaBL6",
+    "votedElections": {
+      "election_engineering2025": [
+        "pos_representative"
+      ],
+      "election_leadership2025": [
+        "pos_president"
+      ]
+    }
+  },
+  {
+    "studentId": "22-00375",
+    "name": "Banataog",
+    "email": "dong123@gmail.com",
+    "role": "student",
+    "passwordHash": "$2b$12$5P5v49xGQbHgfNUSi5U3FOWLOnx.LHuDGXxV3HuY9kpx2zlsmSJCK",
+    "votedElections": {
+      "election_engineering2025": [
+        "pos_representative"
+      ],
+      "election_leadership2025": [
+        "pos_president"
+      ]
+    }
+  },
+  {
+    "studentId": "22-00374",
+    "name": "dodong",
+    "email": "dodong123@gmail.com",
+    "role": "student",
+    "passwordHash": "$2b$12$hdqE9Srah5neq2Fu4Ylf8.yu6d7fss8RphHOQi8Em2F/NJJFdZdXq",
+    "votedElections": {
+      "election_engineering2025": [
+        "pos_representative"
+      ]
+    }
+  }
+]

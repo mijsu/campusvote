@@ -1,0 +1,48 @@
+{
+  "id": "election_sports2024",
+  "title": "University Sports Committee Election 2024",
+  "description": "Election for university sports committee representatives",
+  "startDate": "2024-11-01T00:00:00Z",
+  "endDate": "2024-11-08T23:59:59Z",
+  "positions": [
+    {
+      "id": "pos_sports_coordinator",
+      "title": "Sports Coordinator",
+      "maxVotes": 1,
+      "candidates": [
+        {
+          "id": "cand_gervin_sports",
+          "name": "Gervin Dela Cueva",
+          "bio": "4th year Computer Science student with experience in sports analytics and team management systems.",
+          "photo": "gervin_dela_cueva.jpg",
+          "goals": "Modernize sports facilities with technology, create digital tracking systems for athlete performance, and improve sports equipment management."
+        },
+        {
+          "id": "cand_jericho_sports",
+          "name": "Jericho Galace",
+          "bio": "3rd year Business Administration student and former varsity basketball player.",
+          "photo": "jericho_galace.jpg",
+          "goals": "Improve sports facilities, organize more inter-university competitions, and create better support systems for student athletes."
+        },
+        {
+          "id": "cand_daniel_sports",
+          "name": "Daniel Serrano",
+          "bio": "2nd year Computer Engineering student interested in sports technology and fitness tracking.",
+          "photo": "daniel_serrano.jpg",
+          "goals": "Integrate fitness tracking technology, develop sports apps for students, and create virtual reality training programs for athletes."
+        },
+        {
+          "id": "cand_marjames_sports",
+          "name": "Mar James Delimios",
+          "bio": "3rd year Mechanical Engineering student with experience in sports equipment design.",
+          "photo": "mar_james_delimios.jpg",
+          "goals": "Design and improve sports equipment, create sustainable sports facilities, and develop innovative training equipment for various sports."
+        }
+      ]
+    }
+  ],
+  "createdBy": "admin_01",
+  "createdAt": "2024-10-25T09:00:00Z",
+  "totalVotes": 245,
+  "eligibleVoters": 1000
+}

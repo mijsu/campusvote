@@ -1,0 +1,34 @@
+{
+  "id": "election_engineering2025",
+  "title": "College of Engineering Representative Election 2025",
+  "description": "Representative election for the College of Engineering student body",
+  "startDate": "2025-01-05T00:00:00Z",
+  "endDate": "2025-12-20T23:59:59Z",
+  "positions": [
+    {
+      "id": "pos_representative",
+      "title": "Engineering Representative",
+      "maxVotes": 1,
+      "candidates": [
+        {
+          "id": "cand_daniel",
+          "name": "Daniel Serrano",
+          "bio": "2nd year Computer Engineering student with active involvement in tech clubs and programming competitions.",
+          "photo": "daniel_serrano.jpg",
+          "goals": "Modernize engineering labs with latest technology, organize more hands-on workshops, and create peer mentoring programs for struggling students in technical subjects."
+        },
+        {
+          "id": "cand_marjames",
+          "name": "Mar James Delimios",
+          "bio": "3rd year Mechanical Engineering student focused on sustainable engineering practices and innovation projects.",
+          "photo": "mar_james_delimios.jpg",
+          "goals": "Promote sustainable engineering practices, establish innovation labs for student projects, and bridge the gap between theoretical learning and practical industry applications."
+        }
+      ]
+    }
+  ],
+  "createdBy": "admin_01",
+  "createdAt": "2025-01-15T09:00:00Z",
+  "totalVotes": 0,
+  "eligibleVoters": 1000
+}

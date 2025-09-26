@@ -1,0 +1,42 @@
+
+{
+  "electionId": "election_sports2024",
+  "title": "University Sports Committee Election 2024",
+  "generatedAt": "2024-11-09T00:00:00Z",
+  "totalVotes": 245,
+  "eligibleVoters": 1000,
+  "turnoutPercentage": 24.5,
+  "results": [
+    {
+      "positionId": "pos_sports_coordinator",
+      "positionTitle": "Sports Coordinator",
+      "totalVotes": 245,
+      "candidates": [
+        {
+          "candidateId": "cand_jericho_sports",
+          "candidateName": "Jericho Galace",
+          "voteCount": 98,
+          "percentage": 40.0
+        },
+        {
+          "candidateId": "cand_gervin_sports",
+          "candidateName": "Gervin Dela Cueva",
+          "voteCount": 75,
+          "percentage": 30.6
+        },
+        {
+          "candidateId": "cand_daniel_sports",
+          "candidateName": "Daniel Serrano",
+          "voteCount": 42,
+          "percentage": 17.1
+        },
+        {
+          "candidateId": "cand_marjames_sports",
+          "candidateName": "Mar James Delimios",
+          "voteCount": 30,
+          "percentage": 12.2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Class Suspension",
+    "content": "Class is Suspended 09/27/2025, Saturday",
+    "author": "New Admin",
+    "createdAt": "2025-09-26T14:07:57.508Z",
+    "id": "405fd924-0b2c-455d-9261-23aa8930332e"
+  },
+  {
+    "id": "test-1",
+    "title": "Test",
+    "content": "Hello",
+    "createdAt": "2025-09-26T13:57:19.367Z",
+    "author": "me"
+  }
+]

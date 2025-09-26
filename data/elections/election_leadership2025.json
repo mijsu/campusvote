@@ -1,0 +1,35 @@
+
+{
+  "id": "election_leadership2025",
+  "title": "Student Council Leadership Election 2025",
+  "description": "Annual election for student council leadership positions",
+  "startDate": "2025-01-01T00:00:00Z",
+  "endDate": "2025-12-31T23:59:59Z",
+  "positions": [
+    {
+      "id": "pos_president",
+      "title": "President",
+      "maxVotes": 1,
+      "candidates": [
+        {
+          "id": "cand_gervin",
+          "name": "Gervin Dela Cueva",
+          "bio": "4th year Computer Science student with strong leadership experience in various student organizations and technology clubs.",
+          "photo": "gervin_dela_cueva.jpg",
+          "goals": "Enhance student services through technology integration, improve campus Wi-Fi infrastructure, and create more opportunities for student-industry partnerships."
+        },
+        {
+          "id": "cand_jericho",
+          "name": "Jericho Galace",
+          "bio": "3rd year Business Administration student passionate about student welfare and campus community building.",
+          "photo": "jericho_galace.jpg",
+          "goals": "Improve campus dining options, establish better mental health support programs, and create more recreational facilities for students."
+        }
+      ]
+    }
+  ],
+  "createdBy": "admin_01",
+  "createdAt": "2025-01-10T09:00:00Z",
+  "totalVotes": 0,
+  "eligibleVoters": 1000
+}
