@@ -1,6 +1,6 @@
 import express from 'express';
 import { registerRoutes } from '../server/routes';
-import session from 'express-session';
+import cookieSession from 'cookie-session';
 import serverless from 'serverless-http';
 
 const app = express();
@@ -10,15 +10,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Session configuration for serverless
-app.use(session({
-  secret: process.env.COOKIE_SECRET || 'your-secret-key-change-in-production',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  }
+app.use(cookieSession({
+  name: 'session',
+  keys: [process.env.COOKIE_SECRET || 'change-this-in-prod'],
+  maxAge: 24 * 60 * 60 * 1000,
+  secure: process.env.NODE_ENV === 'production',
+  httpOnly: true
 }));
 
 // Register API routes
